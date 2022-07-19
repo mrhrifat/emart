@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import {
   selectedProduct,
   removeSelectedProduct,
+  fetchProductDetails,
 } from "../redux/actions/productAction";
 
 const ProductDetails = () => {
@@ -16,20 +17,20 @@ const ProductDetails = () => {
   const product = useSelector((state) => state.product);
   const { image, title, price, category, description } = product;
 
-  const fetchProductDetails = async () => {
-    const response = await axios
-      .get(`https://fakestoreapi.com/products/${productId}`)
-      .catch((e) => {
-        console.log(e);
-      });
-    // console.log(response.data);
+  // const fetchProductDetails = async () => {
+  //   const response = await axios
+  //     .get(`https://fakestoreapi.com/products/${productId}`)
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  //   // console.log(response.data);
 
-    dispatch(selectedProduct(response.data));
-  };
+  //   dispatch(selectedProduct(response.data));
+  // };
 
   useEffect(() => {
     if (productId && product !== "") {
-      fetchProductDetails();
+      dispatch(fetchProductDetails(productId));
     }
     return () => {
       dispatch(removeSelectedProduct());

@@ -1,3 +1,4 @@
+import martApi from "../../api/martApi";
 import { ActionType } from "../constants/actionType";
 
 export const setProducts = (products) => {
@@ -18,4 +19,9 @@ export const removeSelectedProduct = () => {
   return {
     type: ActionType.REMOVE_SELECTED_PRODUCT,
   };
+};
+
+export const fetchProducts = () => async (dispatch) => {
+  const response = await martApi.get("/products");
+  dispatch({ type: ActionType.FETCH_PRODUCTS, payload: response.data });
 };

@@ -25,3 +25,8 @@ export const fetchProducts = () => async (dispatch) => {
   const response = await martApi.get("/products");
   dispatch({ type: ActionType.FETCH_PRODUCTS, payload: response.data });
 };
+
+export const fetchProductDetails = (id) => async (dispatch) => {
+  const response = await martApi.get(`/products/${id}`);
+  dispatch({ type: ActionType.SELECTED_PRODUCT, payload: response.data });
+};
